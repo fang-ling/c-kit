@@ -1,0 +1,36 @@
+/*
+ *  Atomicity.c
+ *  c-kit
+ *
+ *  Created by Fang Ling on 2026/4/25.
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
+#include "Atomicity.h"
+
+CUnsignedInteger32 CAtomicityIncrease(CUnsignedInteger32* value) {
+  return __atomic_add_fetch(value, 1, __ATOMIC_RELAXED);
+}
+
+CUnsignedInteger32 CAtomicityDecrease(CUnsignedInteger32* value) {
+  return __atomic_sub_fetch(value, 1, __ATOMIC_RELAXED);
+}
+
+void CAtomicityAcquireMemoryBarrier() {
+  __atomic_thread_fence(__ATOMIC_ACQUIRE);
+}
+
+void CAtomicityReleaseMemoryBarrier() {
+  __atomic_thread_fence(__ATOMIC_RELEASE);
+}
