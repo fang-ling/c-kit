@@ -1,8 +1,8 @@
 /*
- *  CKit.h
+ *  CIO.c
  *  c-kit
  *
- *  Created by Fang Ling on 2026/4/25.
+ *  Created by Fang Ling on 2026/5/1.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -17,15 +17,4 @@
  *  limitations under the License.
  */
 
-#ifndef CKit_h
-#define CKit_h
-
-#include "../../Atomicity.h"
-#include "../../Base.h"
-#include "../../Debugging.h"
-#include "../../Integer.h"
-#include "../../CIO.h"
-#include "../../Memory.h"
-#include "../../String.h"
-
-#endif /* CKit_h */
+#include "CIO.h"
