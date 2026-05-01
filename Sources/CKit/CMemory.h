@@ -1,5 +1,5 @@
 /*
- *  String.h
+ *  CMemory.h
  *  c-kit
  *
  *  Created by Fang Ling on 2026/4/25.
@@ -17,9 +17,21 @@
  *  limitations under the License.
  */
 
-#ifndef String_h
-#define String_h
+#ifndef CMemory_h
+#define CMemory_h
 
-typedef const char* CString;
+#include <stdlib.h>
 
-#endif /* String_h */
+#include "CBase.h"
+
+C_ASSUME_NONNULL_BEGIN
+
+#define CMemoryAllocate malloc
+
+#define CMemoryDeallocate free
+
+#define CMemoryCopy memmove
+
+C_ASSUME_NONNULL_END
+
+#endif /* CMemory_h */

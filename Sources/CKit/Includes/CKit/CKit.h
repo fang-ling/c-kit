@@ -20,12 +20,12 @@
 #ifndef CKit_h
 #define CKit_h
 
-#include "../../Atomicity.h"
-#include "../../Base.h"
-#include "../../Debugging.h"
-#include "../../Integer.h"
+#include "../../CAtomicity.h"
+#include "../../CBase.h"
+#include "../../CDebugging.h"
 #include "../../CIO.h"
-#include "../../Memory.h"
-#include "../../String.h"
+#include "../../CNumber.h"
+#include "../../CMemory.h"
+#include "../../CString.h"
 
 #endif /* CKit_h */

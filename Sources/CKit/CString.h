@@ -1,5 +1,5 @@
 /*
- *  Memory.c
+ *  CString.h
  *  c-kit
  *
  *  Created by Fang Ling on 2026/4/25.
@@ -17,12 +17,28 @@
  *  limitations under the License.
  */
 
-#include "Memory.h"
+#ifndef CString_h
+#define CString_h
 
-void* CMemoryAllocate(CUnsignedInteger64 capacity) {
-  return malloc(capacity);
-}
+#include <string.h>
 
-void CMemoryDeallocate(void* memory) {
-  free(memory);
-}
+#include "CBase.h"
+#include "CNumber.h"
+
+C_ASSUME_NONNULL_BEGIN
+
+typedef const char* CString;
+
+#define CStringGetCount strlen
+
+CUnsignedInteger64
+CStringConvertUTF8CharactersToUTF32Characters(
+  CInteger32* destination,
+  CString nonnil * nonnil source,
+  CUnsignedInteger64 maximumAllowedSize,
+  CUnsignedInteger64 destinationSize
+);
+
+C_ASSUME_NONNULL_END
+
+#endif /* CString_h */

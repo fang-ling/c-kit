@@ -22,8 +22,14 @@
 
 #include <stdio.h>
 
+#include "CBase.h"
+
+C_ASSUME_NONNULL_BEGIN
+
 #define CIOScanWithFormat scanf
 
 #define CIOPrintWithFormat printf
+
+C_ASSUME_NONNULL_END
 
 #endif /* CIO_h */

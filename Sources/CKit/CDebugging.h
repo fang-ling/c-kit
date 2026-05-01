@@ -1,5 +1,5 @@
 /*
- *  Memory.h
+ *  CDebugging.h
  *  c-kit
  *
  *  Created by Fang Ling on 2026/4/25.
@@ -17,15 +17,18 @@
  *  limitations under the License.
  */
 
-#ifndef Memory_h
-#define Memory_h
+#ifndef CDebugging_h
+#define CDebugging_h
 
-#include <stdlib.h>
+#include "CBase.h"
 
-#include "Integer.h"
+C_ASSUME_NONNULL_BEGIN
 
-void* CMemoryAllocate(CUnsignedInteger64 capacity);
+#define CDebuggingHaltWithMessage(message) \
+  do {                                     \
+    __builtin_trap();                      \
+  } while (0)
 
-void CMemoryDeallocate(void* memory);
+C_ASSUME_NONNULL_END
 
-#endif /* Memory_h */
+#endif /* CDebugging_h */

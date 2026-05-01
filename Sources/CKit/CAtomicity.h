@@ -1,5 +1,5 @@
 /*
- *  Atomicity.h
+ *  CAtomicity.h
  *  c-kit
  *
  *  Created by Fang Ling on 2026/4/25.
@@ -17,10 +17,13 @@
  *  limitations under the License.
  */
 
-#ifndef Atomicity_h
-#define Atomicity_h
+#ifndef CAtomicity_h
+#define CAtomicity_h
 
-#include "Integer.h"
+#include "CBase.h"
+#include "CNumber.h"
+
+C_ASSUME_NONNULL_BEGIN
 
 CUnsignedInteger32 CAtomicityIncrease(CUnsignedInteger32* value);
 
@@ -30,4 +33,6 @@ void CAtomicityAcquireMemoryBarrier();
 
 void CAtomicityReleaseMemoryBarrier();
 
-#endif /* Atomicity_h */
+C_ASSUME_NONNULL_END
+
+#endif /* CAtomicity_h */

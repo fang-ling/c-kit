@@ -1,5 +1,5 @@
 /*
- *  Integer.h
+ *  CMemory.c
  *  c-kit
  *
  *  Created by Fang Ling on 2026/4/25.
@@ -17,24 +17,8 @@
  *  limitations under the License.
  */
 
-#ifndef Integer_h
-#define Integer_h
+#include "CMemory.h"
 
-#include <stdint.h>
+C_ASSUME_NONNULL_BEGIN
 
-/**
- * A 8-bit unsigned integer value type.
- */
-typedef uint8_t CUnsignedInteger8;
-
-/**
- * A 32-bit unsigned integer value type.
- */
-typedef uint32_t CUnsignedInteger32;
-
-/**
- * A 64-bit unsigned integer value type.
- */
-typedef uint64_t CUnsignedInteger64;
-
-#endif /* Integer_h */
+C_ASSUME_NONNULL_END

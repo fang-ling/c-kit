@@ -18,3 +18,7 @@
  */
 
 #include "CIO.h"
+
+C_ASSUME_NONNULL_BEGIN
+
+C_ASSUME_NONNULL_END
