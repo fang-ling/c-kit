@@ -32,6 +32,8 @@ C_ASSUME_NONNULL_BEGIN
 
 #define CMemoryCopy memmove
 
+#define CMemoryResize realloc
+
 C_ASSUME_NONNULL_END
 
 #endif /* CMemory_h */
