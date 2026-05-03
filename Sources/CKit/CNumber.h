@@ -20,11 +20,14 @@
 #ifndef CNumber_h
 #define CNumber_h
 
+#include <stdbool.h>
 #include <stdint.h>
 
 #include "CBase.h"
 
 C_ASSUME_NONNULL_BEGIN
+
+typedef bool CBoolean;
 
 /**
  * A 8-bit signed integer value type.
@@ -47,9 +50,20 @@ typedef int32_t CInteger32;
 typedef uint32_t CUnsignedInteger32;
 
 /**
+ * A 64-bit signed integer value type.
+ */
+typedef int64_t CInteger64;
+
+/**
  * A 64-bit unsigned integer value type.
  */
 typedef uint64_t CUnsignedInteger64;
+
+#define CNumberFindMaximum(lhs, rhs) ({ \
+  __auto_type _lhs = (lhs);             \
+  __auto_type _rhs = (rhs);             \
+  _lhs > _rhs ? _lhs : _rhs;            \
+})
 
 #define CNumberFindMinimum(lhs, rhs) ({ \
   __auto_type _lhs = (lhs);             \
