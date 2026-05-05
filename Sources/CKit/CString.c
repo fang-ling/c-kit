@@ -19,12 +19,12 @@
  *  Portions of this file are derived from the FreeBSD libc implementation.
  *
  *  Original sources:
- *    freebsd-src/lib/libc/locale/mbstowcs.c
- *      - Commit hash: 559a218c9b257775fb249b67945fe4a05b7a6b9f
  *    freebsd-src/lib/libc/locale/utf8.c
  *      - Commit hash: 1d386b48a555f61cb7325543adbbb5c3f3407a66
  *
- *  Copyright (c) 2002-2004 Tim J. Robbins.
+ *  Copyright 2013 Garrett D'Amore <garrett@damore.org>
+ *  Copyright 2011 Nexenta Systems, Inc.  All rights reserved.
+ *  Copyright (c) 2002-2004 Tim J. Robbins
  *  All rights reserved.
  *
  *  Copyright (c) 2011 The FreeBSD Foundation
@@ -247,6 +247,133 @@ CStringConvertUTF8CharactersToUTF32Characters(
   *source = string;
 
   return unicodeCharacterCount;
+}
+
+CUnsignedInteger64
+CStringConvertUTF32CharacterToUTF8Character(
+  CInteger8* destination,
+  CInteger32 source,
+  CStringUTF8StateMachine* stateMachine
+) {
+  if (stateMachine->remainingByteCount != 0) {
+    return -1;
+  }
+
+  if (destination == NULL) {
+    /* Reset to initial shift state (no-op). */
+    return 1;
+  }
+
+  /*
+   * Determine the number of octets needed to represent this character.
+   * We always output the shortest sequence possible. Also specify the first few
+   * bits of the first octet, which contains the information about the sequence
+   * length.
+   */
+  let mask = (CInteger8)0;
+  let codePointLength = 0;
+  if ((source & ~0x7f) == 0) {
+    /* Fast path for plain ASCII characters. */
+    *destination = (CInteger8)source;
+    return 1;
+  } else if ((source & ~0x7ff) == 0) {
+    mask = 0xc0;
+    codePointLength = 2;
+  } else if ((source & ~0xffff) == 0) {
+    if (source >= 0xd800 && source <= 0xdfff) {
+      return -1;
+    }
+    mask = 0xe0;
+    codePointLength = 3;
+  } else if (source >= 0 && source <= 0x10ffff) {
+    mask = 0xf0;
+    codePointLength = 4;
+  } else {
+    return -1;
+  }
+
+  /*
+   * Output the octets representing the character in chunks of 6 bits, least
+   * significant last. The first octet is a special case because it contains the
+   * sequence length information.
+   */
+  let i = codePointLength - 1;
+  for (; i > 0; i -= 1) {
+    destination[i] = (source & 0x3f) | 0x80;
+    source >>= 6;
+  }
+  *destination = (source & 0xff) | mask;
+
+  return codePointLength;
+}
+
+CUnsignedInteger64
+CStringConvertUTF32CharactersToUTF8Characters(
+  CInteger8* destination,
+  const CInteger32** source,
+  CUnsignedInteger64 maximumAllowedSize,
+  CUnsignedInteger64 destinationSize
+) {
+  let stateMachine = (CStringUTF8StateMachine){ 0 };
+  CInteger8 buffer[4];
+
+  if (stateMachine.remainingByteCount != 0) {
+    return -1;
+  }
+
+  let string = *source;
+  let utf8CharacterCount = 0ull;
+
+  while (destinationSize > 0 && maximumAllowedSize-- > 0) {
+    let utf8CodePointLength = 0ull;
+
+    if (0 <= *string && *string < 0x80) {
+      /* Fast path for plain ASCII characters. */
+      utf8CodePointLength = 1;
+      *destination = *string;
+    } else if (destinationSize > 4) {
+      /* Enough space to translate in-place. */
+      utf8CodePointLength = CStringConvertUTF32CharacterToUTF8Character(
+        destination,
+        *string,
+        &stateMachine
+      );
+      if (utf8CodePointLength == -1) {
+        *source = string;
+
+        return -1;
+      }
+    } else {
+      /* May not be enough space; use temporary buffer. */
+      utf8CodePointLength = CStringConvertUTF32CharacterToUTF8Character(
+        buffer,
+        *string,
+        &stateMachine
+      );
+      if (utf8CodePointLength == -1) {
+        *source = string;
+
+        return -1;
+      }
+      if (utf8CodePointLength > (CInteger32)destinationSize) {
+        /* MB sequence for character won't fit. */
+        break;
+      }
+      memcpy(destination, buffer, utf8CodePointLength);
+    }
+    if (*string == '\0') {
+      *source = NULL;
+
+      return (utf8CharacterCount + utf8CodePointLength - 1);
+    }
+    string += 1;
+    destination += utf8CodePointLength;
+    destinationSize -= utf8CodePointLength;
+    utf8CharacterCount += utf8CodePointLength;
+  }
+  *source = string;
+
+  return utf8CharacterCount;
 }
 
 C_ASSUME_NONNULL_END

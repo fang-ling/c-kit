@@ -39,6 +39,14 @@ CStringConvertUTF8CharactersToUTF32Characters(
   CUnsignedInteger64 destinationSize
 );
 
+CUnsignedInteger64
+CStringConvertUTF32CharactersToUTF8Characters(
+  CInteger8* destination,
+  const CInteger32* nonnil * nonnil source,
+  CUnsignedInteger64 maximumAllowedSize,
+  CUnsignedInteger64 destinationSize
+);
+
 C_ASSUME_NONNULL_END
 
 #endif /* CString_h */
