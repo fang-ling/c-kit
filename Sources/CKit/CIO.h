@@ -1,8 +1,8 @@
 /*
- *  Debugging.h
+ *  CIO.h
  *  c-kit
  *
- *  Created by Fang Ling on 2026/4/25.
+ *  Created by Fang Ling on 2026/5/1.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -17,12 +17,19 @@
  *  limitations under the License.
  */
 
-#ifndef Debugging_h
-#define Debugging_h
+#ifndef CIO_h
+#define CIO_h
 
-#define CHaltWithMessage(message) \
-  do {                            \
-    __builtin_trap();             \
-  } while (0)
+#include <stdio.h>
 
-#endif /* Debugging_h */
+#include "CBase.h"
+
+C_ASSUME_NONNULL_BEGIN
+
+#define CIOScanWithFormat scanf
+
+#define CIOPrintWithFormat printf
+
+C_ASSUME_NONNULL_END
+
+#endif /* CIO_h */

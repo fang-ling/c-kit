@@ -1,5 +1,5 @@
 /*
- *  String.h
+ *  CAtomicity.h
  *  c-kit
  *
  *  Created by Fang Ling on 2026/4/25.
@@ -17,9 +17,22 @@
  *  limitations under the License.
  */
 
-#ifndef String_h
-#define String_h
+#ifndef CAtomicity_h
+#define CAtomicity_h
 
-typedef const char* CString;
+#include "CBase.h"
+#include "CNumber.h"
 
-#endif /* String_h */
+C_ASSUME_NONNULL_BEGIN
+
+CUnsignedInteger32 CAtomicityIncrease(CUnsignedInteger32* value);
+
+CUnsignedInteger32 CAtomicityDecrease(CUnsignedInteger32* value);
+
+void CAtomicityAcquireMemoryBarrier();
+
+void CAtomicityReleaseMemoryBarrier();
+
+C_ASSUME_NONNULL_END
+
+#endif /* CAtomicity_h */

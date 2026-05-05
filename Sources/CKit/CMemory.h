@@ -1,5 +1,5 @@
 /*
- *  Memory.h
+ *  CMemory.h
  *  c-kit
  *
  *  Created by Fang Ling on 2026/4/25.
@@ -17,15 +17,23 @@
  *  limitations under the License.
  */
 
-#ifndef Memory_h
-#define Memory_h
+#ifndef CMemory_h
+#define CMemory_h
 
 #include <stdlib.h>
 
-#include "Integer.h"
+#include "CBase.h"
 
-void* CMemoryAllocate(CUnsignedInteger64 capacity);
+C_ASSUME_NONNULL_BEGIN
 
-void CMemoryDeallocate(void* memory);
+#define CMemoryAllocate malloc
 
-#endif /* Memory_h */
+#define CMemoryDeallocate free
+
+#define CMemoryCopy memmove
+
+#define CMemoryResize realloc
+
+C_ASSUME_NONNULL_END
+
+#endif /* CMemory_h */
