@@ -59,6 +59,8 @@ typedef int64_t CInteger64;
  */
 typedef uint64_t CUnsignedInteger64;
 
+typedef double CFloatingPoint64;
+
 #define CNumberFindMaximum(lhs, rhs) ({ \
   __auto_type _lhs = (lhs);             \
   __auto_type _rhs = (rhs);             \
