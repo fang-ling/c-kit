@@ -1,8 +1,8 @@
 /*
- *  CKit.h
+ *  CArgument.h
  *  c-kit
  *
- *  Created by Fang Ling on 2026/4/25.
+ *  Created by Fang Ling on 2026/5/10.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -17,16 +17,23 @@
  *  limitations under the License.
  */
 
-#ifndef CKit_h
-#define CKit_h
+#ifndef CArgument_h
+#define CArgument_h
 
-#include "../../CArgument.h"
-#include "../../CAtomicity.h"
-#include "../../CBase.h"
-#include "../../CDebugging.h"
-#include "../../CIO.h"
-#include "../../CNumber.h"
-#include "../../CMemory.h"
-#include "../../CString.h"
+#include <stdarg.h>
 
-#endif /* CKit_h */
+#include "CBase.h"
+
+C_ASSUME_NONNULL_BEGIN
+
+typedef va_list CVariableArgumentList;
+
+#define CVariableArgumentListInitialize va_start
+
+#define CVariableArgumentListDeinitialize va_end
+
+#define CVariableArgumentListGetNextArgument va_arg
+
+C_ASSUME_NONNULL_END
+
+#endif /* CArgument_h */
