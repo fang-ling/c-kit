@@ -31,6 +31,8 @@ typedef const char* CString;
 
 #define CStringGetCount strlen
 
+#define CStringInitializeWithFormat sprintf
+
 CUnsignedInteger64
 CStringConvertUTF8CharactersToUTF32Characters(
   CInteger32* destination,

@@ -76,10 +76,10 @@ CStringConvertUTF8CharacterToUTF32Character(
     return -1;
   }
 
-  if (source == NULL) {
+  if (source == null) {
     source = "";
     n = 1;
-    destination = NULL;
+    destination = null;
   }
 
   /* Incomplete multibyte sequence */
@@ -104,7 +104,7 @@ CStringConvertUTF8CharacterToUTF32Character(
     let newCharacter = (CInteger32)((CUnsignedInteger8)*source);
     if ((newCharacter & 0x80) == 0) {
       /* Fast path for plain ASCII characters. */
-      if (destination != NULL) {
+      if (destination != null) {
         *destination = newCharacter;
       }
 
@@ -177,7 +177,7 @@ CStringConvertUTF8CharacterToUTF32Character(
     return -1;
   }
 
-  if (destination != NULL) {
+  if (destination != null) {
     *destination = currentCodePoint;
   }
   stateMachine->remainingByteCount = 0;
@@ -211,7 +211,7 @@ CStringConvertUTF8CharactersToUTF32Characters(
   let utf8CharacterCount = 0ull;
   while (destinationSize-- > 0) {
     if (maximumAllowedSize > 0 && (CInteger8)*string > 0) {
-      /* Fast path for plain ASCII characters excluding NULL. */
+      /* Fast path for plain ASCII characters excluding null. */
       *destination = (CInteger32)*string;
       utf8CharacterCount = 1;
     } else {
@@ -232,7 +232,7 @@ CStringConvertUTF8CharactersToUTF32Characters(
 
         return unicodeCharacterCount;
       } else if (utf8CharacterCount == 0) {
-        *source = NULL;
+        *source = null;
 
         return unicodeCharacterCount;
       }
@@ -259,7 +259,7 @@ CStringConvertUTF32CharacterToUTF8Character(
     return -1;
   }
 
-  if (destination == NULL) {
+  if (destination == null) {
     /* Reset to initial shift state (no-op). */
     return 1;
   }
@@ -362,7 +362,7 @@ CStringConvertUTF32CharactersToUTF8Characters(
       memcpy(destination, buffer, utf8CodePointLength);
     }
     if (*string == '\0') {
-      *source = NULL;
+      *source = null;
 
       return (utf8CharacterCount + utf8CodePointLength - 1);
     }

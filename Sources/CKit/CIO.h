@@ -30,8 +30,6 @@ C_ASSUME_NONNULL_BEGIN
 
 #define CIOPrintWithFormat printf
 
-#define CIOPrintToStringWithFormat sprintf
-
 C_ASSUME_NONNULL_END
 
 #endif /* CIO_h */

@@ -20,14 +20,17 @@
 #ifndef CNumber_h
 #define CNumber_h
 
-#include <stdbool.h>
 #include <stdint.h>
 
 #include "CBase.h"
 
 C_ASSUME_NONNULL_BEGIN
 
-typedef bool CBoolean;
+#define yes 1
+
+#define no 0
+
+typedef _Bool CBoolean;
 
 /**
  * A 8-bit signed integer value type.

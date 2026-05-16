@@ -27,6 +27,8 @@
 #define nonnil   _Nonnull
 #define nillable _Nullable
 
+#define null (void*)0
+
 #define C_INITIALIZER __attribute__((constructor))
 
 #endif /* CBase_h */
