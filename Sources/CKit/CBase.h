@@ -31,4 +31,6 @@
 
 #define C_INITIALIZER __attribute__((constructor))
 
+#define C_PACKED_STRUCT __attribute__((packed))
+
 #endif /* CBase_h */
