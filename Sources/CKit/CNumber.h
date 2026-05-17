@@ -76,6 +76,8 @@ typedef double CFloatingPoint64;
   _lhs < _rhs ? _lhs : _rhs;            \
 })
 
+#define CNumberCalculateAbsoluteValue(value) ((value) < 0 ? -(value) : (value))
+
 C_ASSUME_NONNULL_END
 
 #endif /* CNumber_h */
