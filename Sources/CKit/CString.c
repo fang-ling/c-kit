@@ -82,7 +82,7 @@ CStringConvertUTF8CharacterToUTF32Character(
     destination = null;
   }
 
-  /* Incomplete multibyte sequence */
+  /* Incomplete multibyte sequence. */
   if (n == 0) {
     return -2ull;
   }
