@@ -11,3 +11,4 @@ The CKit defines a base layer of functionality for writing C programs.
 ### Values and Collections
 
 - <doc:Global-Numeric-Functions>
+- <doc:Strings-and-Text>
