@@ -64,10 +64,10 @@ typedef uint64_t CUnsignedInteger64;
 
 typedef double CFloatingPoint64;
 
-#define CNumberFindMaximum(lhs, rhs) ({ \
-  __auto_type _lhs = (lhs);             \
-  __auto_type _rhs = (rhs);             \
-  _lhs > _rhs ? _lhs : _rhs;            \
+#define CNumberFindMaximum(x, y) ({ \
+  __auto_type _x = (x);             \
+  __auto_type _y = (y);             \
+  _x > _y ? _x : _y;                \
 })
 
 #define CNumberFindMinimum(lhs, rhs) ({ \

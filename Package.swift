@@ -27,10 +27,8 @@ let package = Package(
     .library(name: "CKit", targets: ["CKit"])
   ],
   targets: [
-    .target(
-      name: "CKit",
-      publicHeadersPath: "Includes"
-    )
+    .target(name: "CKit", publicHeadersPath: "Includes"),
+    .testTarget(name: "CKitTests", dependencies: ["CKit"])
   ],
   cLanguageStandard: .c89
 )
