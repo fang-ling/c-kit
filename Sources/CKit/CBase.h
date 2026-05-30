@@ -31,4 +31,60 @@
 
 #define C_INITIALIZER __attribute__((constructor))
 
+/* Apple platforms. */
+#if defined(__APPLE__)
+#  define C_TARGET_OS_APPLE 1
+#else
+#  define C_TARGET_OS_APPLE 0
+#endif
+
+/* Linux. */
+#if defined(__linux__)
+#  define C_TARGET_OS_LINUX 1
+#else
+#  define C_TARGET_OS_LINUX 0
+#endif
+
+/* FreeBSD. */
+#if defined(__FreeBSD__)
+#  define C_TARGET_OS_FREEBSD 1
+#else
+#  define C_TARGET_OS_FREEBSD 0
+#endif
+
+/* WASI. */
+#if defined(__wasi__)
+#  define C_TARGET_OS_WASI 1
+#else
+#  define C_TARGET_OS_WASI 0
+#endif
+
+/* Online Judge platforms. */
+#if defined(ONLINE_JUDGE)
+#  define C_TARGET_OS_ONLINE_JUDGE 1
+#else
+#  define C_TARGET_OS_ONLINE_JUDGE 0
+#endif
+
+/* ARM64 architecture. */
+#if defined(__arm64__)
+#  define C_TARGET_ARCHITECTURE_ARM64 1
+#else
+#  define C_TARGET_ARCHITECTURE_ARM64 0
+#endif
+
+/* x86_64 architecture. */
+#if defined(__x86_64__)
+#  define C_TARGET_ARCHITECTURE_X86_64 1
+#else
+#  define C_TARGET_ARCHITECTURE_X86_64 0
+#endif
+
+/* WebAssembly 32-bit architecture. */
+#if defined(__wasm32__)
+#  define C_TARGET_ARCHITECTURE_WASM32 1
+#else
+#  define C_TARGET_ARCHITECTURE_WASM32 0
+#endif
+
 #endif /* CBase_h */
