@@ -30,6 +30,9 @@ C_ASSUME_NONNULL_BEGIN
 
 #define no 0
 
+/**
+ * A value type whose instances are either `yes` or `no`.
+ */
 typedef _Bool CBoolean;
 
 /**
@@ -41,6 +44,16 @@ typedef char CInteger8;
  * A 8-bit unsigned integer value type.
  */
 typedef uint8_t CUnsignedInteger8;
+
+/**
+ * A 16-bit signed integer value type.
+ */
+typedef int16_t CInteger16;
+
+/**
+ * A 16-bit unsigned integer value type.
+ */
+typedef uint16_t CUnsignedInteger16;
 
 /**
  * A 32-bit signed integer value type.
@@ -62,7 +75,47 @@ typedef int64_t CInteger64;
  */
 typedef uint64_t CUnsignedInteger64;
 
+/**
+ * A signed integer value type.
+ *
+ * When building 32-bit applications, `CInteger` is a 32-bit integer. A 64-bit
+ * application treats `CInteger` as a 64-bit integer.
+ */
+typedef long CInteger;
+
+/**
+ * An unsigned integer value type.
+ *
+ * When building 32-bit applications, `CUnsignedInteger` is a 32-bit unsigned
+ * integer. A 64-bit application treats `CUnsignedInteger` as a 64-bit unsigned
+ * integer.
+ */
+typedef unsigned long CUnsignedInteger;
+
+/**
+ * A 32-bit floating point type.
+ */
+typedef float CFloatingPoint32;
+
+/**
+ * A 64-bit floating point type.
+ */
 typedef double CFloatingPoint64;
+
+#if C_TARGET_ARCHITECTURE_WASM32
+#  define _C_FLOATING_POINT_TYPE float
+#else
+#  define _C_FLOATING_POINT_TYPE double
+#endif
+
+/**
+ * The basic type for floating-point scalar values.
+ *
+ * When building 32-bit applications, `CFloatingPoint` is a 32-bit, IEEE
+ * single-precision floating point type. A 64-bit application treats
+ * `CFloatingPoint` a 64-bit, IEEE double-precision floating point type.
+ */
+typedef _C_FLOATING_POINT_TYPE CFloatingPoint;
 
 #define CNumberFindMaximum(x, y) ({ \
   __auto_type _x = (x);             \

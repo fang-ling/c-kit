@@ -36,7 +36,7 @@ func testCStringConvertUTF8CharactersToUTF32Characters() {
         var destinationSize = CStringConvertUTF8CharactersToUTF32Characters(
           nil,
           utf8String,
-          CUnsignedInteger64(utf8String.utf8.count),
+          CInteger(utf8String.utf8.count),
           0
         )
         #expect(destinationSize == utf32String.count)
@@ -49,7 +49,7 @@ func testCStringConvertUTF8CharactersToUTF32Characters() {
           CStringConvertUTF8CharactersToUTF32Characters(
             buffer.baseAddress,
             utf8String,
-            CUnsignedInteger64(utf8String.utf8.count),
+            CInteger(utf8String.utf8.count),
             destinationSize
           )
         }
@@ -77,19 +77,19 @@ func testCStringConvertUTF32CharactersToUTF8Characters() {
           CStringConvertUTF32CharactersToUTF8Characters(
             nil,
             buffer.baseAddress!,
-            CUnsignedInteger64(utf32String.count),
+            CInteger(utf32String.count),
             0
           )
         }
         #expect(destinationSize == utf8String.utf8.count)
 
-        var destination = [CInteger8](repeating: 0, count: Int(destinationSize))
+        var destination = [CInteger8](repeating: 0, count: destinationSize)
         destinationSize = destination.withUnsafeMutableBufferPointer { buffer in
           utf32String.withUnsafeBufferPointer { utf32StringBuffer in
             CStringConvertUTF32CharactersToUTF8Characters(
               buffer.baseAddress,
               utf32StringBuffer.baseAddress!,
-              CUnsignedInteger64(utf32String.count),
+              CInteger(utf32String.count),
               destinationSize
             )
           }
