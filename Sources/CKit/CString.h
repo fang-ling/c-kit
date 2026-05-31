@@ -51,14 +51,14 @@ typedef const char* CString;
  *
  * - Returns: The number of UTF-8 character that make up the converted part of
  *   the string, not including the terminating `null` byte. If a UTF-32
- *   character is encountered that could not be converted, `-1ull` is returned.
+ *   character is encountered that could not be converted, `-1` is returned.
  */
-CUnsignedInteger64
+CInteger
 CStringConvertUTF8CharactersToUTF32Characters(
   CInteger32* nillable destination,
   CString source,
-  CUnsignedInteger64 maximumAllowedSize,
-  CUnsignedInteger64 destinationSize
+  CInteger maximumAllowedSize,
+  CInteger destinationSize
 );
 
 /**
@@ -76,14 +76,14 @@ CStringConvertUTF8CharactersToUTF32Characters(
  *
  * - Returns: The number of UTF-32 character that make up the converted part of
  *   the string, not including the terminating `null` byte. If a UTF-8 character
- *   is encountered that could not be converted, `-1ull` is returned.
+ *   is encountered that could not be converted, `-1` is returned.
  */
-CUnsignedInteger64
+CInteger
 CStringConvertUTF32CharactersToUTF8Characters(
   CInteger8* nillable destination,
   const CInteger32* source,
-  CUnsignedInteger64 maximumAllowedSize,
-  CUnsignedInteger64 destinationSize
+  CInteger maximumAllowedSize,
+  CInteger destinationSize
 );
 
 C_ASSUME_NONNULL_END

@@ -64,16 +64,16 @@ typedef struct CStringUTF8StateMachine {
   CInteger32 remainingByteCount;
 } CStringUTF8StateMachine;
 
-CUnsignedInteger64
+CInteger
 CStringConvertUTF8CharacterToUTF32Character(
   CInteger32* nillable destination,
   CString source,
-  CUnsignedInteger64 n,
+  CInteger n,
   CStringUTF8StateMachine* stateMachine
 ) {
   if (stateMachine->remainingByteCount < 0 ||
       stateMachine->remainingByteCount > 6) {
-    return -1ull;
+    return -1l;
   }
 
   if (source == null) {
@@ -84,7 +84,7 @@ CStringConvertUTF8CharacterToUTF32Character(
 
   /* Incomplete multibyte sequence. */
   if (n == 0) {
-    return -2ull;
+    return -2l;
   }
 
   let remainingByteCount = 0;
@@ -125,7 +125,7 @@ CStringConvertUTF8CharacterToUTF32Character(
       leastValidCodePoint = 0x10000;
     } else {
       /* Malformed input; input is not UTF-8. */
-      return -1ull;
+      return -1l;
     }
   } else {
     remainingByteCount = stateMachine->remainingByteCount;
@@ -161,18 +161,18 @@ CStringConvertUTF8CharacterToUTF32Character(
     stateMachine->leastValidCodePoint = leastValidCodePoint;
     stateMachine->currentCodePoint = currentCodePoint;
 
-    return -2ull;
+    return -2l;
   }
 
   if (currentCodePoint < leastValidCodePoint) {
     /* Malformed input; redundant encoding. */
-    return -1ull;
+    return -1l;
   }
 
   if ((currentCodePoint >= 0xd800 && currentCodePoint <= 0xdfff) ||
       currentCodePoint > 0x10ffff) {
     /* Malformed input; invalid code points. */
-    return -1ull;
+    return -1l;
   }
 
   if (destination != null) {
@@ -183,18 +183,18 @@ CStringConvertUTF8CharacterToUTF32Character(
   return currentCodePoint == '\0' ? 0 : remainingByteCount;
 }
 
-CUnsignedInteger64
+CInteger
 CStringConvertUTF8CharactersToUTF32Characters(
   CInteger32* nillable destination,
   CString source,
-  CUnsignedInteger64 maximumAllowedSize,
-  CUnsignedInteger64 destinationSize
+  CInteger maximumAllowedSize,
+  CInteger destinationSize
 ) {
   let stateMachine = (CStringUTF8StateMachine){ 0 };
   let string = source;
 
-  let unicodeCharacterCount = 0ull;
-  let utf8CharacterCount = 0ull;
+  let unicodeCharacterCount = 0l;
+  let utf8CharacterCount = 0l;
 
   if (destination == null) {
     /*
@@ -221,10 +221,10 @@ CStringConvertUTF8CharactersToUTF32Characters(
           &stateMachine
         );
 
-        if (utf8CharacterCount == -1ull) {
+        if (utf8CharacterCount == -1l) {
           /* Invalid sequence. */
-          return -1ull;
-        } else if (utf8CharacterCount == 0 || utf8CharacterCount == -2ull) {
+          return -1l;
+        } else if (utf8CharacterCount == 0 || utf8CharacterCount == -2l) {
           return unicodeCharacterCount;
         }
       }
@@ -246,7 +246,7 @@ CStringConvertUTF8CharactersToUTF32Characters(
     stateMachine.remainingByteCount > 0 &&
     (CInteger8)*string > 0
   ) {
-    return -1ull;
+    return -1l;
   }
 
   while (destinationSize-- > 0) {
@@ -262,9 +262,9 @@ CStringConvertUTF8CharactersToUTF32Characters(
         &stateMachine
       );
 
-      if (utf8CharacterCount == -1ull) {
-        return -1ull;
-      } else if (utf8CharacterCount == 0 || utf8CharacterCount == -2ull) {
+      if (utf8CharacterCount == -1l) {
+        return -1l;
+      } else if (utf8CharacterCount == 0 || utf8CharacterCount == -2l) {
         return unicodeCharacterCount;
       }
     }
@@ -278,14 +278,14 @@ CStringConvertUTF8CharactersToUTF32Characters(
   return unicodeCharacterCount;
 }
 
-CUnsignedInteger64
+CInteger
 CStringConvertUTF32CharacterToUTF8Character(
   CInteger8* destination,
   CInteger32 source,
   CStringUTF8StateMachine* stateMachine
 ) {
   if (stateMachine->remainingByteCount != 0) {
-    return -1ull;
+    return -1l;
   }
 
   if (destination == null) {
@@ -310,7 +310,7 @@ CStringConvertUTF32CharacterToUTF8Character(
     codePointLength = 2;
   } else if ((source & ~0xffff) == 0) {
     if (source >= 0xd800 && source <= 0xdfff) {
-      return -1ull;
+      return -1l;
     }
     mask = 0xe0;
     codePointLength = 3;
@@ -318,7 +318,7 @@ CStringConvertUTF32CharacterToUTF8Character(
     mask = 0xf0;
     codePointLength = 4;
   } else {
-    return -1ull;
+    return -1l;
   }
 
   /*
@@ -336,12 +336,12 @@ CStringConvertUTF32CharacterToUTF8Character(
   return codePointLength;
 }
 
-CUnsignedInteger64
+CInteger
 CStringConvertUTF32CharactersToUTF8Characters(
   CInteger8* nillable destination,
   const CInteger32* source,
-  CUnsignedInteger64 maximumAllowedSize,
-  CUnsignedInteger64 destinationSize
+  CInteger maximumAllowedSize,
+  CInteger destinationSize
 ) {
   let stateMachine = (CStringUTF8StateMachine){ 0 };
   CInteger8 buffer[4];
@@ -351,11 +351,11 @@ CStringConvertUTF32CharactersToUTF8Characters(
   }
 
   let string = source;
-  let utf8CharacterCount = 0ull;
+  let utf8CharacterCount = 0l;
 
   if (destination == null) {
     while (maximumAllowedSize-- > 0) {
-      let count = 0ull;
+      let count = 0l;
 
       if (0 <= *string && *string < 0x80) {
         /* Fast path for plain ASCII characters. */
@@ -367,9 +367,9 @@ CStringConvertUTF32CharactersToUTF8Characters(
           &stateMachine
         );
 
-        if (count == -1ull) {
+        if (count == -1l) {
           /* Invalid character. */
-          return -1ull;
+          return -1l;
         }
       }
 
@@ -385,7 +385,7 @@ CStringConvertUTF32CharactersToUTF8Characters(
   }
 
   while (destinationSize > 0 && maximumAllowedSize-- > 0) {
-    let utf8CodePointLength = 0ull;
+    let utf8CodePointLength = 0l;
 
     if (0 <= *string && *string < 0x80) {
       /* Fast path for plain ASCII characters. */
@@ -399,7 +399,7 @@ CStringConvertUTF32CharactersToUTF8Characters(
         &stateMachine
       );
       if (utf8CodePointLength == -1) {
-        return -1ull;
+        return -1l;
       }
     } else {
       /* May not be enough space; use temporary buffer. */
@@ -409,7 +409,7 @@ CStringConvertUTF32CharactersToUTF8Characters(
         &stateMachine
       );
       if (utf8CodePointLength == -1) {
-        return -1ull;
+        return -1l;
       }
       if (utf8CodePointLength > (CInteger32)destinationSize) {
         /* MB sequence for character won't fit. */
