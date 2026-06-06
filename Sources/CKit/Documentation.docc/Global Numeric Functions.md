@@ -6,4 +6,5 @@ Use these functions with numeric values and other comparable types.
 
 ### Choosing the Smallest and Largest Value
 
+- ``CNumberFindMinimum``
 - ``CNumberFindMaximum``
