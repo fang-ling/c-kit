@@ -36,6 +36,8 @@ typedef const char* CString;
 
 #define CStringInitializeWithFormat sprintf
 
+#define CStringCompare strcmp
+
 /**
  * Converts a UTF-8 string to its UTF-32 representation.
  *

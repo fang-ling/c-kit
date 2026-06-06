@@ -123,10 +123,10 @@ typedef _C_FLOATING_POINT_TYPE CFloatingPoint;
   _x > _y ? _x : _y;                \
 })
 
-#define CNumberFindMinimum(lhs, rhs) ({ \
-  __auto_type _lhs = (lhs);             \
-  __auto_type _rhs = (rhs);             \
-  _lhs < _rhs ? _lhs : _rhs;            \
+#define CNumberFindMinimum(x, y) ({ \
+  __auto_type _x = (x);             \
+  __auto_type _y = (y);             \
+  _x < _y ? _x : _y;                \
 })
 
 #define CNumberCalculateAbsoluteValue(value) ((value) < 0 ? -(value) : (value))
