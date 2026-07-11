@@ -26,7 +26,7 @@
 
 C_ASSUME_NONNULL_BEGIN
 
-#define CMemoryAllocate malloc
+#define CMemoryAllocate calloc
 
 #define CMemoryDeallocate free
 
