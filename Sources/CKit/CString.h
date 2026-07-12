@@ -88,6 +88,21 @@ CStringConvertUTF32CharactersToUTF8Characters(
   CInteger destinationSize
 );
 
+/**
+ * Compares two null-terminated UTF-32 strings.
+ *
+ * - Parameters:
+ *   - string1: The first string to use in the comparison.
+ *   - string2: The second string to use in the comparison.
+ *
+ * - Returns: A integer value that indicates whether the `string1` is equal to,
+ *   less than, or greater than the `string2`.
+ */
+CInteger32 CStringCompareUTF32Characters(
+  CInteger32* string1,
+  CInteger32* string2
+);
+
 C_ASSUME_NONNULL_END
 
 #endif /* CString_h */

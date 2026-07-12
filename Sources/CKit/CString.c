@@ -429,4 +429,22 @@ CStringConvertUTF32CharactersToUTF8Characters(
   return utf8CharacterCount;
 }
 
+CInteger32 CStringCompareUTF32Characters(
+  CInteger32* string1,
+  CInteger32* string2
+) {
+  while (*string1 == *string2) {
+    if (*string1 == '\0') {
+      return 0;
+    }
+
+    string1 += 1;
+    string2 += 1;
+  }
+
+  return (
+    *(const CUnsignedInteger32*)string1 - *(const CUnsignedInteger32*)string2
+  );
+}
+
 C_ASSUME_NONNULL_END
