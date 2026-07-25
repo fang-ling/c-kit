@@ -21,6 +21,7 @@
 #define CNumber_h
 
 #include <limits.h>
+#include <math.h>
 #include <stdint.h>
 
 #include "CBase.h"
@@ -136,6 +137,8 @@ typedef _C_FLOATING_POINT_TYPE CFloatingPoint;
  * The maximum value for a ``CInteger``.
  */
 #define CIntegerMaximum LONG_MAX
+
+#define CNumberIsNaN isnan
 
 C_ASSUME_NONNULL_END
 
