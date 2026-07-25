@@ -20,6 +20,7 @@
 #ifndef CNumber_h
 #define CNumber_h
 
+#include <limits.h>
 #include <stdint.h>
 
 #include "CBase.h"
@@ -130,6 +131,11 @@ typedef _C_FLOATING_POINT_TYPE CFloatingPoint;
 })
 
 #define CNumberCalculateAbsoluteValue(value) ((value) < 0 ? -(value) : (value))
+
+/**
+ * The maximum value for a ``CInteger``.
+ */
+#define CIntegerMaximum LONG_MAX
 
 C_ASSUME_NONNULL_END
 
