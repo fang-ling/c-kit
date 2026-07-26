@@ -143,7 +143,7 @@ typedef _C_FLOATING_POINT_TYPE CFloatingPoint;
  *
  * Because a NaN always compares not equal to itself, to test whether a floating-point value is NaN, use its ``CNumberIsNaN`` function instead of the equal-to operator (==).
  */
-extern const CFloatingPoint CFloatingPointNaN;
+#define CFloatingPointNaN NAN
 
 #define CNumberIsNaN isnan
 

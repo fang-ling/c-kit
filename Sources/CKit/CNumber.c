@@ -18,6 +18,4 @@
 
 C_ASSUME_NONNULL_BEGIN
 
-const CFloatingPoint CFloatingPointNaN = NAN;
-
 C_ASSUME_NONNULL_END
