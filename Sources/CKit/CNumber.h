@@ -138,6 +138,16 @@ typedef _C_FLOATING_POINT_TYPE CFloatingPoint;
  */
 #define CIntegerMaximum LONG_MAX
 
+/**
+ * A quiet NaN ("not a number").
+ *
+ * A NaN compares not equal, not greater than, and not less than every value, including itself.
+ * Passing a NaN to an operation generally results in NaN.
+ *
+ * Because a NaN always compares not equal to itself, to test whether a floating-point value is NaN, use its ``CNumberIsNaN`` function instead of the equal-to operator (==).
+ */
+extern const CFloatingPoint CFloatingPointNaN;
+
 #define CNumberIsNaN isnan
 
 C_ASSUME_NONNULL_END
