@@ -1,9 +1,9 @@
 /*===--------------------------------------------------------------------------------------------------------------------------------------------------------------------------===*
  *
- *  CKit.h
+ *  CSwiftBridging.c
  *  c-kit
  *
- *  Created by Fang Ling on 2026/4/25.
+ *  Created by Fang Ling on 2026/8/1.
  *
  *  This source file is part of the CKit open source project
  *
@@ -16,17 +16,8 @@
  *
  *===--------------------------------------------------------------------------------------------------------------------------------------------------------------------------===*/
 
-#ifndef CKit_h
-#define CKit_h
+#include "CSwiftBridging.h"
 
-#include "../../CArgument.h"
-#include "../../CAtomicity.h"
-#include "../../CBase.h"
-#include "../../CDebugging.h"
-#include "../../CIO.h"
-#include "../../CMemory.h"
-#include "../../CNumber.h"
-#include "../../CString.h"
-#include "../../CSwiftBridging.h"
+C_ASSUME_NONNULL_BEGIN
 
-#endif /* CKit_h */
+C_ASSUME_NONNULL_END
