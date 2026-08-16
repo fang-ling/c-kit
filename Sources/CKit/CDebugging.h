@@ -33,7 +33,7 @@ C_ASSUME_NONNULL_BEGIN
  *
  * - Parameters:
  *   - condition: The condition to test.
- *   - A string to print if `condition` is evaluated to `no`.
+ *   - message: A string to print if `condition` is evaluated to `no`.
  */
 #define CDebuggingPrecondition(condition, message) \
   do {                                             \
